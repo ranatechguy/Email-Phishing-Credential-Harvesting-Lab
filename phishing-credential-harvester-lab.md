@@ -1,8 +1,10 @@
 # Credential Harvesting Phishing Simulation — Social-Engineer Toolkit (SET)
 
-**Prepared by:** Kiran Rana
+**Author:** Kiran Rana
 **Date:** 2026-09-17
 **Environment:** Isolated internal lab (VMware Workstation)
+
+---
 
 ## ⚠️ Scope & Authorization
 
@@ -10,23 +12,27 @@ This exercise was performed entirely inside a **private, isolated VMware lab** a
 
 > Never run credential-harvesting or phishing techniques against systems or users you do not have explicit, documented authorization to test.
 
+---
+
 ## Table of Contents
 
-1. Objective
-2. Lab Environment
-3. Attack Walkthrough
-   - 1. Launch SET
-   - 2. Select Social-Engineering Attacks
-   - 3. Choose the Website Attack Vector
-   - 4. Set the Post-Back IP Address
-   - 5. Select the Clone Template and Launch the Listener
-   - 6. Deliver the Phishing Email
-   - 7. Target Clicks the Link and "Signs In"
-   - 8. Credentials Are Captured
-4. Attack Chain Summary
-5. Detection & Defense Notes
-6. Conclusion
-7. Disclaimer
+1. [Objective](#objective)
+2. [Lab Environment](#lab-environment)
+3. [Attack Walkthrough](#attack-walkthrough)
+   - [1. Launch SET](#1-launch-set)
+   - [2. Select Social-Engineering Attacks](#2-select-social-engineering-attacks)
+   - [3. Choose the Website Attack Vector](#3-choose-the-website-attack-vector)
+   - [4. Set the Post-Back IP Address](#4-set-the-post-back-ip-address)
+   - [5. Select the Clone Template and Launch the Listener](#5-select-the-clone-template-and-launch-the-listener)
+   - [6. Deliver the Phishing Email](#6-deliver-the-phishing-email)
+   - [7. Target Clicks the Link and "Signs In"](#7-target-clicks-the-link-and-signs-in)
+   - [8. Credentials Are Captured](#8-credentials-are-captured)
+4. [Attack Chain Summary](#attack-chain-summary)
+5. [Detection & Defense Notes](#detection--defense-notes)
+6. [Conclusion](#conclusion)
+7. [Disclaimer](#disclaimer)
+
+---
 
 ## Objective
 
@@ -46,6 +52,8 @@ Simulate a credential-harvesting phishing attack against a test user to understa
 | Attacker IP | `10.0.0.188` |
 | Target | Test Gmail account / test user VM |
 | Attack type | Website Attack Vector → Credential Harvester (Web Template, Google) |
+
+---
 
 ## Attack Walkthrough
 
@@ -199,6 +207,8 @@ PARAM: PersistentCookie=yes
 
 Pressing **Ctrl+C** at this point instructs SET to generate a captured-credentials report for the session.
 
+---
+
 ## Attack Chain Summary
 
 ```
@@ -232,6 +242,8 @@ From a blue-team / SOC perspective, this lab highlights several detection and mi
 This lab demonstrated, end-to-end, how quickly and convincingly a credential-harvesting phishing attack can be stood up with freely available tooling: within a few menu selections, SET cloned a trusted login page, served it from an attacker-controlled host, and captured plaintext credentials the moment a test user submitted the form. No exploit or malware was required — the entire chain relied on social engineering (a plausible pretext email) and the user's trust in a familiar-looking login page.
 
 The exercise reinforces why phishing remains one of the highest-ROI attack vectors for real-world adversaries, and why layered defenses matter: email filtering and link inspection to stop the lure, browser/TLS and DNS protections to catch the clone, network/SIEM monitoring to detect the traffic, and MFA to blunt the impact if credentials are still captured. Running this safely in an isolated lab provided hands-on, reproducible insight into both the attacker workflow and the specific telemetry a SOC analyst should watch for when investigating a suspected credential-harvesting incident.
+
+---
 
 ## Disclaimer
 
